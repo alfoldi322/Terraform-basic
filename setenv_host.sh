@@ -1,0 +1,5 @@
+#/bin/bash
+
+export TF_VAR_access_key=AKIAWI7DMEOIXQTVW3TA
+export TF_VAR_secret_key=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
+export TF_VAR_region=eu-central-1
