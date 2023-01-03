@@ -1,5 +1,13 @@
 # 3 EC2 Ubuntu 18.04 LTS | 1 PSQL | 1 APACHE2 | 1 JRE:11 |
 
+# Create an Elastic IP for Database
+resource "aws_eip" "alfoldi322" {
+  vpc = true
+
+  tags = {
+    Name = "alfoldi322-eip"
+  }
+}
 
 # EC2 WITH PSQL
 resource "aws_instance" "database" {
@@ -8,6 +16,7 @@ resource "aws_instance" "database" {
   instance_type = "t2.micro"
   subnet_id = aws_subnet.alfoldi322-private
   security_groups = [aws_security_group.alfoldi322-db.sg-db322]
+  private_ip = "10.0.0.5"
   user_data = <<EOF
 #!/bin/bash
 

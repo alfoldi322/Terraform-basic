@@ -19,6 +19,7 @@ resource "aws_security_group" "alfoldi322-web" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  # Allow outgoing traffic on all port
     egress {
     from_port        = 0
     to_port          = 0
@@ -47,6 +48,7 @@ resource "aws_security_group" "alfoldi322-java" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  # Allow outgoing traffic on all port
     egress {
     from_port        = 0
     to_port          = 0
@@ -77,6 +79,7 @@ resource "aws_security_group" "alfoldi322-db" {
     cidr_blocks = ["0.0.0.0/0"]
     security_group_id = "sg-java322"
   }
+  # Allow outgoing traffic on all port
     egress {
     from_port        = 0
     to_port          = 0
