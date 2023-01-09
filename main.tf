@@ -1,4 +1,4 @@
-# CLOUD PROVIDER
+# Cloud provider
 
 terraform {
   required_providers {
@@ -8,28 +8,27 @@ terraform {
     }
   }
 }
-
 provider "aws" {
   access_key = "${var.access_key}"
   secret_key = "${var.secret_key}"
   region     = "${var.region}"
 }
 
-#IMPORT MODULES
+# Import modules
 
-module "vpc" {
-  source = "./modules/vpc"
+# VPC + SUBNETS + ROUTING
+module "network" {
+  source = "./modules/network"
 }
-module "security-groups" {
-  source = "./modules/security-groups"
+# Database EC2 + DB security group
+module "database" {
+  source = "./modules/database"
 }
-module "subnets" {
-  source = "./modules/subnets"
+# Java EC2 + Java security group
+module "java" {
+  source = "./modules/java"
 }
-module "ec2" {
-  source = "./modules/ec2"
-  vpc_id = module.vpc.vpc_id
-}
-module "variables" {
-  source = "./modules/variables"
+# Web EC2 + Web security group
+module "web" {
+  source = "./modules/web"
 }

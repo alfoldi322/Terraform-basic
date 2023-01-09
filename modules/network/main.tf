@@ -1,6 +1,15 @@
+# Create a VPC
+resource "aws_vpc" "alfoldi322" {
+  cidr_block = "10.0.0.0/16"
+
+  tags = {
+    Name = "alfoldi322-vpc"
+  }
+}
+
 # Create two subnets
 
-#Public
+# Public
 resource "aws_subnet" "alfoldi322-public" {
   vpc_id            = aws_vpc.alfoldi322.id
   cidr_block        = "10.0.1.0/24"
@@ -13,7 +22,7 @@ resource "aws_subnet" "alfoldi322-public" {
   }
 }
 
-#Private
+# Private
 resource "aws_subnet" "alfoldi322-private" {
   vpc_id            = aws_vpc.alfoldi322private.id
   cidr_block        = "10.0.2.0/24"
@@ -38,6 +47,7 @@ resource "aws_nat_gateway" "alfoldi322" {
   route_table_id  = aws_route_table.alfoldi322public.id
 }
 
+# Create an IGW
 resource "aws_internet_gateway" "example" {
   vpc_id = aws_vpc.alfoldi322.id
 }

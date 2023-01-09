@@ -1,1 +1,6 @@
 setenvhost.sh
+sandbox.tf
+./modules/ec2.tf
+./modules/subnets.tf
+./modules/vpc.tf
+./modules/security-groups.tf
