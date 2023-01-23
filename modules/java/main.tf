@@ -1,9 +1,14 @@
+# Import network module
+module "network" {
+  source = "../network"
+}
+
 # EC2 WITH JRE11
 resource "aws_instance" "java" {
   ami = "ami-0f55e09c5540d9b2f"
   instance_type = "t2.micro"
-  subnet_id =  aws_subnet.alfoldi322-public
-  security_groups = [aws_security_group.alfoldi322-web.sg-java322]
+  subnet_id = var.public_subnet_id
+  security_groups = [aws_security_group.java.id]
   user_data = <<EOF
 #!/bin/bash
 
@@ -14,10 +19,10 @@ EOF
 
 # Create a security group for java
 
-resource "aws_security_group" "alfoldi322-java" {
-  name   = "alfoldi322-java"
-  security_group_id = "sg-java322"
-  vpc_id = aws_vpc.alfoldi322.id
+resource "aws_security_group" "java" {
+  name   = "java"
+  vpc_id = var.vpc_id
+  depends_on = [module.network.vpc]
 
  # Allow incoming Ping
   ingress {

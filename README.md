@@ -12,3 +12,15 @@ Simple infrastructure defined in Terraform
 - Modify module import (main.tf)
 - Add ping rule all instance for test
 
+11 01 
+
+- Fix env variables for provider
+- Add dependency on network for instances
+- Fix routing (modules/network)
+
+
+23 01
+- Add output variables
+- Remove provider from root main.tf using aws profile instead
+Issue
+- Creating multiple resources

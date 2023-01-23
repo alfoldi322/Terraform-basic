@@ -1,5 +1,4 @@
 # Cloud provider
-
 terraform {
   required_providers {
     aws = {
@@ -8,12 +7,6 @@ terraform {
     }
   }
 }
-provider "aws" {
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
-  region     = "${var.region}"
-}
-
 # Import modules
 
 # VPC + SUBNETS + ROUTING
@@ -23,12 +16,15 @@ module "network" {
 # Database EC2 + DB security group
 module "database" {
   source = "./modules/database"
+  depends_on = [module.java]
 }
 # Java EC2 + Java security group
 module "java" {
   source = "./modules/java"
+  depends_on = [module.network]
 }
 # Web EC2 + Web security group
 module "web" {
   source = "./modules/web"
+  depends_on = [module.network]
 }
