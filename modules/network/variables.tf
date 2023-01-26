@@ -9,8 +9,9 @@ variable "vpc_cidr_block" {
 variable "public_subnet" {
   default = "public_subnet"
 }
+# Public subnet CIDR
 variable "public_cidr_block" {
-  default = "10.0.1.0/24"
+  default = "10.0.12.0/22"
 }
 # Route table
 variable "public_route_table" {
@@ -20,7 +21,7 @@ variable "public_route_table" {
 variable "private_subnet" {
   default = "private_subnet"
 }
-# CIDR
+# Private subnet CIDR
 variable "private_cidr_block" {
   default = "10.0.2.0/24"
 }

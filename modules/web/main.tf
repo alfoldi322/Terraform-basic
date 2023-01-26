@@ -1,14 +1,9 @@
-# Import network module
-module "network" {
-  source = "../network"
-}
-
 # EC2 WITH APACHE2
 resource "aws_instance" "web" {
 # Ubuntu 18.04 LTS AMI
-  ami = "ami-0f55e09c5540d9b2f"
+  ami = "ami-0d500797138456fbb"
   instance_type = "t2.micro"
-  subnet_id =  var.public_subnet_id
+  subnet_id = var.public_subnet_id
   security_groups = [aws_security_group.web.id]
   depends_on = [aws_security_group.web]
   user_data = <<EOF
@@ -19,13 +14,15 @@ apt-get install -y apache2
 
 service apache2 start
 EOF
+  tags = {
+    Name = "web_instance"
+  }
 }
 
 # Create a security group for web
 resource "aws_security_group" "web" {
   name   = "web"
   vpc_id = var.vpc_id
-  depends_on = [module.network.vpc]
 
   #Allow incoming Ping
   ingress {

@@ -20,7 +20,11 @@ Simple infrastructure defined in Terraform
 
 
 23 01
+
 - Add output variables
 - Remove provider from root main.tf using aws profile instead
-Issue
-- Creating multiple resources
+
+26 01
+- Update instances AMI
+- Import resources to one module to another (main.tf)
+- Infrastructure start without error
