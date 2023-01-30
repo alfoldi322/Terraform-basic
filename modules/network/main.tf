@@ -40,7 +40,6 @@ resource "aws_subnet" "private_subnet" {
 # Create an Elastic IP for the NAT gateway
 resource "aws_eip" "elastic_ip" {
   vpc        = true
-  #depends_on = [var.vpc_id]
 }
 
 # Create the NAT + IP
@@ -70,6 +69,13 @@ resource "aws_route" "private_to_nat" {
 resource "aws_route_table" "public_route_table" {
   vpc_id      = aws_vpc.main_vpc.id
 }
+
+# Public subnet route table association
+resource "aws_route_table_association" "public_association" {
+  subnet_id      = aws_subnet.public_subnet.id
+  route_table_id = aws_route_table.public_route_table.id
+}
+
 
 # Create a route public-subnet > IGW
 resource "aws_route" "public-to-internet" {
